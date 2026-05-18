@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>DGRL Grenzwert</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+
+h1 {
+  color: #1f4ea3;
+}
+
+.graph {
+  margin-top: 30px;
+}
+
+.value {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.box {
+  width: 100%;
+  height: 120px;
+  margin-top: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>DGRL – Grenzwert verstehen</h1>
+
+<p>
+Bewegen Sie den Regler und prüfen Sie, ob der Druck unter die DGRL fällt.
+</p>
+
+<div class="graph">
+
+  <input type="range" id="slider" min="0" max="2" step="0.1" value="0.5">
+
+  <div class="value" id="value">0.5 bar</div>
+
+  <div class="box" id="box">
+    Grenzbereich
+  </div>
+
+</div>
+
+</div>
+
+<script>
+
+const slider = document.getElementById("slider");
+const value = document.getElementById("value");
+const box = document.getElementById("box");
+
+function update() {
+
+  const p = parseFloat(slider.value);
+
+  value.textContent = p.toFixed(1) + " bar";
+
+  if (p <= 0.5) {
+    box.style.background = "#dc3545"; // red
+    box.textContent = "❌ Nicht DGRL-pflichtig";
+  } else {
+    box.style.background = "#28a745"; // green
+    box.textContent = "✅ DGRL-pflichtig";
+  }
+
+}
+
+slider.oninput = update;
+
+update();
+
+</script>
+
+</body>
+</html>
